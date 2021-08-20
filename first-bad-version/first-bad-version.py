@@ -7,7 +7,7 @@ class Solution:
     def firstBadVersion(self, n):
         hi = n
         lo = 0
-        while hi >= lo:
+        while lo <= hi:
           mid = (hi + lo) // 2
           midBad = isBadVersion(mid)
           prevBad = isBadVersion(mid - 1)
