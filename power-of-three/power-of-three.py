@@ -1,12 +1,3 @@
 class Solution:
     def isPowerOfThree(self, n: int) -> bool:
-        if n == 1: return True
-        while n > 26:
-          n /= 27
-          if n == 1:
-            return True
-        while n > 1:
-          n /= 3
-          if n == 1:
-            return True
-        return False
+        return n > 0 and 1162261467 % n == 0
