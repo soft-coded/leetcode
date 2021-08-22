@@ -5,7 +5,7 @@ class Solution:
       for i in range(len(nums)):
         if nums[i] == 1:
           cur += 1
-        elif nums[i] == 0:
+        else:
           mx = max(mx, cur)
           cur = 0
       mx = max(mx, cur)
