@@ -1,6 +1,10 @@
 class Solution:
     def arrangeCoins(self, n: int) -> int:
-        i = 1
-        while i * (i + 1) / 2 < n:
-          i += 1
-        return i - 1 if i * (i + 1) / 2 != n else i
+        l, r = 0, n
+        while l <= r:
+          mid = (l + r) // 2
+          sm = mid * (mid + 1) // 2
+          if sm == n: return mid
+          if sm > n: r = mid - 1
+          else: l = mid + 1
+        return r
