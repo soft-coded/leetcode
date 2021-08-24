@@ -8,7 +8,6 @@ class Node:
 
 class Solution:
     def postorder(self, root: 'Node') -> List[int]:
-      st = [root]
       ans = []
       def po(node):
         if not node: return
