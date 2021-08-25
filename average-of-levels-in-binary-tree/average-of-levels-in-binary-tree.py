@@ -9,17 +9,16 @@ class Solution:
       dq = deque()
       dq.append(root)
       ans = []
+      sm = 0
       while dq:
-        sm = 0; n = 0
-        level = deque()
-        while dq:
+        l = len(dq)
+        for i in range(l):
           node = dq.popleft()
           sm += node.val
-          n += 1
           if node.left:
-            level.append(node.left)
+            dq.append(node.left)
           if node.right:  
-            level.append(node.right)
-        dq = level
-        ans.append(sm / n)
+            dq.append(node.right)
+        ans.append(sm / l)
+        sm = 0
       return ans
