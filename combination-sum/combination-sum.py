@@ -1,6 +1,7 @@
 class Solution:
     def combinationSum(self, candidates, target):
         ret = []
+        candidates.sort()
         self.dfs(candidates, target, [], ret)
         return ret
     
