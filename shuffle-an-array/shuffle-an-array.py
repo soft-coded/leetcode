@@ -9,10 +9,7 @@ class Solution:
         return self.array
 
     def shuffle(self):
-        aux = list(self.array)
-
-        for idx in range(len(self.array)):
-            remove_idx = random.randrange(len(aux))
-            self.array[idx] = aux.pop(remove_idx)
-
+        for i in range(len(self.array)):
+            swap_idx = random.randrange(i, len(self.array))
+            self.array[i], self.array[swap_idx] = self.array[swap_idx], self.array[i]
         return self.array
