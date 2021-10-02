@@ -8,7 +8,6 @@ class Solution:
       juj = None
       for key, val in d.items():
         if not val:
-          if juj: return -1
           juj = key
           break
       for key, val in d.items():
