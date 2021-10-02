@@ -1,16 +1,10 @@
 class Solution:
-    def findJudge(self, n: int, trust: List[List[int]]) -> int:
-      d = {}
-      for i in range(1, n + 1):
-        d[i] = set()
-      for item in trust:
-        d[item[0]].add(item[1])
-      juj = None
-      for key, val in d.items():
-        if not val:
-          juj = key
-          break
-      for key, val in d.items():
-        if key != juj and juj not in val:
-          return -1
-      return juj
+  def findJudge(self, N, trust):
+    graph = [0] * (N + 1)
+    for i, j in trust:
+      graph[i] -= 1
+      graph[j] += 1
+    for i in range(1, N + 1):
+      if graph[i] == N - 1:
+        return i
+    return -1
