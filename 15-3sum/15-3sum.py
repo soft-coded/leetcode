@@ -10,8 +10,10 @@ class Solution:
           sm = nums[i] + nums[left] + nums[right]
           if sm == 0:
             ans.add((nums[i], nums[left], nums[right]))
-            right -= 1
+            while left < right and nums[right] == nums[right - 1]: right -= 1
+            while left < right and nums[left] == nums[left + 1]: left += 1
             left += 1
+            right -= 1
           elif sm > 0:
             right -= 1
           else:
