@@ -5,10 +5,10 @@ class Solution:
         for num in s:
             if num - 1 not in s:
                 curnum = num
-                cur = 1
+                curlen = 1
                 while curnum + 1 in s:
                     curnum += 1
-                    cur += 1
-                ans = max(ans, cur)
+                    curlen += 1
+                ans = max(ans, curlen)
                 
         return ans
