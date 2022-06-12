@@ -1,10 +1,10 @@
 class Solution:
     def searchMatrix(self, mat: List[List[int]], t: int) -> bool:
-      rows = len(mat) - 1
+      rows = len(mat)
       cols = len(mat[0]) - 1
       i = 0
       j = cols
-      while i < rows + 1 and j >= 0:
+      while i < rows and j >= 0:
         if mat[i][j] == t:
           return True
         elif mat[i][j] < t:
