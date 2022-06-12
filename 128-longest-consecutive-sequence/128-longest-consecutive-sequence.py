@@ -2,9 +2,6 @@ class Solution:
     def longestConsecutive(self, nums):
         ans = 0
         s = set(nums)
-        cur = 1
-        curnum = None
-
         for num in s:
             if num - 1 not in s:
                 curnum = num
