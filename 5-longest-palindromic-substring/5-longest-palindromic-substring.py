@@ -3,7 +3,7 @@ class Solution:
       if len(s) == 1:
         return s
       mx = 1
-      ind = [0, 0]
+      ind = [0, 1]
       n = len(s)
       for i in range(n - 1):
         if s[i] == s[i + 1]:
@@ -17,7 +17,7 @@ class Solution:
           if curlen > mx:
             mx = curlen
             ind[0] = left + 1
-            ind[1] = right - 1
+            ind[1] = right
         
         if i > 0 and s[i - 1] == s[i + 1]:
           left = i - 2
@@ -30,7 +30,7 @@ class Solution:
           if curlen > mx:
             mx = curlen
             ind[0] = left + 1
-            ind[1] = right - 1
+            ind[1] = right
       
-      return s[ind[0]: ind[1] + 1]
+      return s[ind[0]: ind[1]]
           
