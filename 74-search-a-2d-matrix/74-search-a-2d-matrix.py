@@ -4,7 +4,7 @@ class Solution:
       cols = len(mat[0]) - 1
       i = 0
       j = cols
-      while i < rows and j > -1:
+      while i < rows and j >= 0:
         if mat[i][j] == t:
           return True
         elif mat[i][j] < t:
