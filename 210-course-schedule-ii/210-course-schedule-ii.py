@@ -1,6 +1,7 @@
 class Solution:
     def findOrder(self, courses: int, prereqs) -> List[int]:
       graph = [[] for i in range(courses)]
+      # -1 = visiting, 1 = visited
       visited = [0 for i in range(courses)]
       ans = []
       
@@ -15,7 +16,7 @@ class Solution:
         
         visited[node] = -1
         
-        while graph[node]:
+        while graph[node]: # while the node has dependecies
           dep = graph[node].pop()
           no_cycle = dfs(dep)
           if not no_cycle:
