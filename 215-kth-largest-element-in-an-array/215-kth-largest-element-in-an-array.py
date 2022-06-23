@@ -5,8 +5,8 @@ class Solution:
         def partition(l, r):
             ri = randint(l, r)
             nums[r], nums[ri] = nums[ri], nums[r]
-            for i, v in enumerate(nums[l: r+1], l):
-                if v >= nums[r]:
+            for i in range(l, r + 1):
+                if nums[i] >= nums[r]:
                     nums[l], nums[i] = nums[i], nums[l]
                     l += 1
             return l - 1
