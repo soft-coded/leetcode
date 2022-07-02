@@ -6,8 +6,5 @@ class Solution:
                 duplicate = cur
                 break
             nums[cur] = -nums[cur]
-
-        for i in range(len(nums)):
-            nums[i] = abs(nums[i])
-
+            
         return duplicate
