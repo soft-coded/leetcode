@@ -1,34 +1,35 @@
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-	
-        def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:
-            res = []
-            if not nums:
-                return res
-            average_value = target // k
-            if average_value < nums[0] or nums[-1] < average_value:
-                return res
-            if k == 2:
-                return twoSum(nums, target)
-    
-            for i in range(len(nums)):
-                if i == 0 or nums[i - 1] != nums[i]:
-                    for subset in kSum(nums[i + 1:], target - nums[i], k - 1):
-                        res.append([nums[i]] + subset)
-    
-            return res
-
-        def twoSum(nums: List[int], target: int) -> List[List[int]]:
-            res = []
-            s = set()
-    
-            for i in range(len(nums)):
-                if len(res) == 0 or res[-1][1] != nums[i]:
-                    if target - nums[i] in s:
-                        res.append([target - nums[i], nums[i]])
-                s.add(nums[i])
-    
-            return res
-
-        nums.sort()
-        return kSum(nums, target, 4)
+      nums.sort()
+      n = len(nums)
+      i = 0
+      ans = []
+      while i < n:
+        j = i + 1
+        while j < n:
+          left = j + 1
+          right = n - 1
+          t = target - nums[i] - nums[j]
+          while left < right:
+            sm = nums[left] + nums[right]
+            if sm == t:
+              ans.append([nums[i], nums[j], nums[left], nums[right]])
+              while left < right and nums[left] == nums[left + 1]:
+                left += 1
+              while right > left and nums[right] == nums[right - 1]:
+                right -= 1
+              left += 1
+              right -= 1
+            elif t > sm:
+              left += 1
+            else:
+              right -= 1
+          while j < n - 1 and nums[j] == nums[j + 1]:
+            j += 1
+          j += 1
+        while i < n - 1 and nums[i] == nums[i + 1]:
+          i += 1
+        i += 1
+      
+      return ans
+            
