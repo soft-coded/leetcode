@@ -20,11 +20,32 @@ def next_perm(nums):
   reverse(i + 1, n - 1, nums)
 
   # return nums 
-    
+
+def factorial(num):
+  if num <= 1:
+    return 1
+  return num * factorial(num - 1)
 
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
-      nums = list(range(1, n + 1))
+      one_less_fac = factorial(n - 1)
+      total_perms = 0
+      cur_num = 1
+      while total_perms < k:
+        total_perms += one_less_fac
+        cur_num += 1
+      
+      cur_num -= 1
+      total_perms -= one_less_fac
+      
+      nums = [cur_num]
+      for i in range(1, n + 1):
+        if i == cur_num:
+          continue
+        nums.append(i)
+      
+      k -= total_perms
+      
       for i in range(k - 1):
         next_perm(nums)
       return "".join(list(map(str, nums)))
