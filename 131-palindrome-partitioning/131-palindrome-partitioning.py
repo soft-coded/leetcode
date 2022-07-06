@@ -13,6 +13,7 @@ class Solution:
       def bt(ind, ans, path, s):
         if ind >= len(s): 
           ans.append(path)
+          return
 
         for i in range(len(s) - ind):
           if is_palin(ind, ind + i, s):
