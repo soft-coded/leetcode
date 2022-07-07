@@ -1,17 +1,16 @@
-from random import randint
-
 class Solution:
     def findKthLargest(self, nums, k):
         def partition(l, r):
-            ri = randint(l, r)
-            nums[r], nums[ri] = nums[ri], nums[r]
-            for i in range(l, r + 1):
-                if nums[i] >= nums[r]:
-                    nums[l], nums[i] = nums[i], nums[l]
-                    l += 1
-            return l - 1
+            low = l
+            while l < r:
+                if nums[l] < nums[r]:
+                    nums[l], nums[low] = nums[low], nums[l]
+                    low += 1
+                l += 1
+            nums[low], nums[r] = nums[r], nums[low]
+            return low
         
-        l, r, k = 0, len(nums) - 1, k - 1
+        l, r, k = 0, len(nums) - 1, len(nums) - k
         while True:
             pos = partition(l, r)
             if pos < k:
