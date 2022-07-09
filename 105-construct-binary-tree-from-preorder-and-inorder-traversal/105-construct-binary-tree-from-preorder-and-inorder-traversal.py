@@ -4,19 +4,20 @@ class Solution:
         inorder_index_map = {}
         for index, value in enumerate(inorder):
             inorder_index_map[value] = index
+            
+        def array_to_tree(left, right):
+            nonlocal preorder_index
+            if left > right: 
+              return None
+            
+            root_value = preorder[preorder_index]
+            root = TreeNode(root_value)
+            preorder_index += 1
+            
+            root.left = array_to_tree(left, inorder_index_map[root_value] - 1)
+            root.right = array_to_tree(inorder_index_map[root_value] + 1, right)
+            
+            return root
         
-        def make_tree(pre_s, pre_e, in_s, in_e):
-          if pre_s > pre_e or in_s > in_e:
-            return None
-          
-          node = TreeNode(preorder[pre_s])
-          in_index = inorder_index_map[node.val]
-          nums_left = in_index - in_s
-          
-          node.left = make_tree(pre_s + 1, pre_s + nums_left, in_s, in_index - 1)
-          node.right = make_tree(pre_s + nums_left + 1, pre_e, in_index + 1, in_e)
-          
-          return node
-        
-        return make_tree(0, len(preorder) - 1, 0, len(inorder) - 1)
+        return array_to_tree(0, len(preorder)-1)
           
