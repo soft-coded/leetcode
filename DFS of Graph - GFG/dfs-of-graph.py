@@ -7,17 +7,17 @@ class Solution:
         visited = set()
         ans = []
         
-        def dfs(vertex, neighbours):
+        def dfs(vertex):
             if vertex in visited:
                 return
             
             ans.append(vertex)
             visited.add(vertex)
             
-            for n in neighbours:
-                dfs(n, adj[n])
+            for n in adj[vertex]:
+                dfs(n)
     
-        dfs(0, adj[0])
+        dfs(0)
         return ans
 
 #{ 
