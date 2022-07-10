@@ -16,8 +16,7 @@ class Solution:
             
             for n in neighbours:
                 dfs(n, adj[n])
-        
-        # for vertex, neighbours in enumerate(adj):
+    
         dfs(0, adj[0])
         return ans
 
