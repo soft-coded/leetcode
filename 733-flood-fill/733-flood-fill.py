@@ -13,7 +13,7 @@ class Solution:
                 if r < R - 1: 
                   dfs(r + 1, c)
                 if c > 0: 
-                  dfs(r, c-1)
+                  dfs(r, c - 1)
                 if c < C - 1: 
                   dfs(r, c + 1)
 
