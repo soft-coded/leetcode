@@ -4,7 +4,7 @@ class Solution:
     
     #Function to return a list containing the DFS traversal of the graph.
     def dfsOfGraph(self, V, adj):
-        visited = {}
+        visited = set()
         ans = []
         
         def dfs(vertex, neighbours):
@@ -12,7 +12,7 @@ class Solution:
                 return
             
             ans.append(vertex)
-            visited[vertex] = True
+            visited.add(vertex)
             
             for n in neighbours:
                 dfs(n, adj[n])
