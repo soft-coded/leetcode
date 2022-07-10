@@ -1,13 +1,20 @@
+from random import randint
+
+def swap(arr, l, r):
+  arr[l], arr[r] = arr[r], arr[l]
+
 class Solution:
     def findKthLargest(self, nums, k):
         def partition(l, r):
+            pos = randint(l, r)
+            swap(nums, pos, r)
             low = l
             while l < r:
                 if nums[l] < nums[r]:
-                    nums[l], nums[low] = nums[low], nums[l]
+                    swap(nums, l, low)
                     low += 1
                 l += 1
-            nums[low], nums[r] = nums[r], nums[low]
+            swap(nums, low, r)
             return low
         
         l, r, k = 0, len(nums) - 1, len(nums) - k
