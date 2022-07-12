@@ -5,22 +5,25 @@ class Solution:
 
     #Function to find the shortest distance of all the vertices
     #from the source vertex S.
+    # O((V + E) * log V) time
     def dijkstra(self, V, adj, S):
+        # adj = [[[1, 9]], [[0, 9]]]
         dist = [inf] * V
         dist[S] = 0
-        # heap will have (distance, node)
+        # (dist, node)
         heap = [(0, S)]
-        # adj = [[[1, 9]], [[0, 9]]]
+        
         while heap:
-            cur_dist, cur_node = heappop(heap)
+            _, node = heappop(heap)
             
-            for nei_node, nei_weight in adj[cur_node]:
-                if dist[cur_node] + nei_weight < dist[nei_node]:
-                    dist[nei_node] = dist[cur_node] + nei_weight
-                    heappush(heap, (dist[nei_node], nei_node))
+            for nei, nei_w in adj[node]:
+                sm = dist[node] + nei_w
+                if dist[node] + nei_w < dist[nei]:
+                    dist[nei] = sm
+                    heappush(heap, (dist[nei], nei))
         
         return dist
-
+                    
 #{ 
 #  Driver Code Starts
 #Initial Template for Python 3
