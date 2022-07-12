@@ -8,15 +8,15 @@ class Solution:
     def dijkstra(self, V, adj, S):
         dist = [inf] * V
         dist[S] = 0
-        heap = []
-        heappush(heap, (0, S)) # (distance, node)
+        # heap will have (distance, node)
+        heap = [(0, S)]
         # adj = [[[1, 9]], [[0, 9]]]
         while heap:
-            distance, node = heappop(heap)
+            cur_dist, cur_node = heappop(heap)
             
-            for nei_node, nei_weight in adj[node]:
-                if dist[node] + nei_weight < dist[nei_node]:
-                    dist[nei_node] = dist[node] + nei_weight
+            for nei_node, nei_weight in adj[cur_node]:
+                if dist[cur_node] + nei_weight < dist[nei_node]:
+                    dist[nei_node] = dist[cur_node] + nei_weight
                     heappush(heap, (dist[nei_node], nei_node))
         
         return dist
