@@ -9,26 +9,19 @@ def count01(s):
 
 class Solution:
     def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
-      
-      def recur(index, cur_m, cur_n, memo):
-        if index == len(strs) or (cur_m < 0 or cur_n < 0) or (cur_m == 0 and cur_n == 0):
-          return 0
+        values = []
+        for st in strs:
+          zeros, ones = count01(st)
+          if zeros <= m and ones <= n:
+              values.append((zeros, ones))
+            
+        dp = [[0] * (n + 1) for i in range(m + 1)]
         
-        memo_str = f"{index},{cur_m},{cur_n}"
-        if memo_str in memo:
-          return memo[memo_str]
-        
-        not_pick = recur(index + 1, cur_m, cur_n, memo)
-        zeros, ones = count01(strs[index])
-        pick = -math.inf
-        if zeros <= cur_m and ones <= cur_n:
-          pick = 1 + recur(index + 1, cur_m - zeros, cur_n - ones, memo)
-        
-        ans = max(not_pick, pick)
-        memo[memo_str] = ans
-        return ans
-      
-      return recur(0, m, n, {})
+        for zeros, ones in values:
+          for i in range(m, zeros - 1, -1):
+            for j in range(n, ones - 1, -1):
+              dp[i][j] = max(dp[i][j], dp[i - zeros][j - ones] + 1)
+        return dp[-1][-1]
         
         
         
