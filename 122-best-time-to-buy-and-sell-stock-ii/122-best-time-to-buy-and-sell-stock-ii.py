@@ -2,10 +2,11 @@ class Solution:
   def maxProfit(self, prices: List[int]) -> int:
     memo = {}
     n = len(prices)
+    
     def recur(i, can_buy):
       if i >= n:
         return 0
-      memo_str = "{},{}".format(i, can_buy)
+      memo_str = f"{i},{can_buy}"
       if memo_str in memo:
         return memo[memo_str]
         
