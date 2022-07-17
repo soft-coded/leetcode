@@ -8,7 +8,7 @@ class Solution:
           return 1
         if i < 0:
           return 0
-        memo_str = "{},{}".format(i, j)
+        memo_str = f"{i},{j}"
         if memo_str in memo:
           return memo[memo_str]
 
