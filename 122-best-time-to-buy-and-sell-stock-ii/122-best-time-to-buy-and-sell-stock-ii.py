@@ -1,13 +1,19 @@
 class Solution:
-    def maxProfit(self, A: List[int]) -> int:
-        n = len(A)
-        last_buy = -A[0]
-        last_sold = 0
-                                
-        for i in range(1, n):
-            cur_buy = max(last_buy, last_sold - A[i])
-            cur_sold = max(last_sold, last_buy + A[i])
-            last_buy = cur_buy
-            last_sold = cur_sold
+  def maxProfit(self, prices: List[int]) -> int:
+    memo = {}
+    n = len(prices)
+    def recur(i, can_buy):
+      if i >= n:
+        return 0
+      memo_str = "{},{}".format(i, can_buy)
+      if memo_str in memo:
+        return memo[memo_str]
         
-        return last_sold
+      if can_buy:
+        memo[memo_str] = max(recur(i + 1, True), recur(i + 1, False) - prices[i])
+      else:
+        memo[memo_str] = max(recur(i + 1, False), recur(i + 1, True) + prices[i])
+        
+      return memo[memo_str]
+    
+    return recur(0, True)
