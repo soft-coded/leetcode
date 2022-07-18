@@ -1,11 +1,11 @@
 class Solution:
-    def lengthOfLIS(self, nums: List[int]) -> int:
-      ans = []
-      for item in nums:
-        if not ans or ans[-1] < item:
-          ans.append(item)
-        else:
-          i = bisect_left(ans, item)  
-          ans[i] = item
-      return len(ans)
+  def lengthOfLIS(self, arr: List[int]) -> int:
+    ans = []
+    for i in range(len(arr)):
+      if not ans or arr[i] > ans[-1]:
+        ans.append(arr[i])
+      else:
+        ind = bisect_left(ans, arr[i])
+        ans[ind] = arr[i]
+    return len(ans)
           
