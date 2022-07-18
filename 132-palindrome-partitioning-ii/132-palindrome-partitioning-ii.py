@@ -1,10 +1,10 @@
-def is_palin(s, st, end):
-  while st < end:
-    if s[st] != s[end]:
-      return False
-    st += 1
-    end -= 1
-  return True
+# def is_palin(s, st, end):
+#   while st < end:
+#     if s[st] != s[end]:
+#       return False
+#     st += 1
+#     end -= 1
+#   return True
 
 # class Solution:
 #   def minCut(self, s: str) -> int:
@@ -40,20 +40,23 @@ class Solution:
         n = len(s)
         
         @lru_cache(None)
-        def isPalindrome(l, r):  # l, r inclusive
-            if l >= r: return True
-            if s[l] != s[r]: return False
-            return isPalindrome(l+1, r-1)
+        def is_palin(l, r):
+            if l >= r: 
+              return True
+            if s[l] != s[r]: 
+              return False
+            return is_palin(l + 1, r - 1)
         
         @lru_cache(None)
-        def dp(i):  # s[i..n-1]
+        def recur(i):
             if i == n:
                 return 0
+              
             ans = math.inf
             for j in range(i, n):
-                if (isPalindrome(i, j)):
-                    ans = min(ans, dp(j+1) + 1)
+                if is_palin(i, j):
+                    ans = min(ans, recur(j + 1) + 1)
             return ans
         
-        return dp(0) - 1
+        return recur(0) - 1
       
