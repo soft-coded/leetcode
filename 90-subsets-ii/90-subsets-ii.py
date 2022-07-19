@@ -11,4 +11,3 @@ class Solution(object):
     
     bt(sorted(nums), [], ans, 0)
     return ans
-        
