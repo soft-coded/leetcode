@@ -1,13 +1,14 @@
 class Solution(object):
-    def subsetsWithDup(self, nums):
-        ans = []
-        self.bt(sorted(nums), [], ans)
-        return ans
+  def subsetsWithDup(self, nums):
+    ans = []
+    def bt(nums, path, ans, ind):
+      ans.append(path)
+      
+      for i in range(ind, len(nums)):
+        if i > ind and nums[i] == nums[i - 1]: 
+          continue
+        bt(nums, path + [nums[i]], ans, i + 1)
     
-    def bt(self, nums, path, ans):
-        ans.append(path)
-        for i in range(len(nums)):
-          if i > 0 and nums[i] == nums[i - 1]: 
-            continue
-          self.bt(nums[i + 1:], path + [nums[i]], ans)
+    bt(sorted(nums), [], ans, 0)
+    return ans
         
