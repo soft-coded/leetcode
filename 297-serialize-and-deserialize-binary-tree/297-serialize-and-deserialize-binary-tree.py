@@ -8,30 +8,40 @@
 class Codec:
     def serialize(self, root):
       vals = []
-      def pre(node):
-          if node:
-              vals.append(str(node.val))
-              pre(node.left)
-              pre(node.right)
-          else:
-              vals.append('#')
-                
-      pre(root)
-      return ' '.join(vals)
+      dq = deque()
+      dq.append(root)
+      while dq:
+        node = dq.popleft()
+        if not node:
+          vals.append('#')
+          continue
+        vals.append(str(node.val))
+        dq.append(node.left)
+        dq.append(node.right)
+      
+      return " ".join(vals)
 
     def deserialize(self, data):
-      vals = iter(data.split())
-      
-      def depre():
-          val = next(vals)
-          if val == '#':
-              return None
-          node = TreeNode(int(val))
-          node.left = depre()
-          node.right = depre()
-          return node
+      vals = data.split()
+      dq = deque()
+      root = None
+      if vals[0] != '#':
+        root = TreeNode(int(vals[0]))
+      dq.append(root)
+      i = 1
+      while dq and i < len(vals):
+        node = dq.popleft()
+        left = vals[i]
+        right = vals[i + 1]
+        i += 2
+        if left != '#':
+          node.left = TreeNode(int(left))
+          dq.append(node.left)
+        if right != '#':
+          node.right = TreeNode(int(right))
+          dq.append(node.right)      
         
-      return depre()
+      return root
         
 
 # Your Codec object will be instantiated and called as such:
