@@ -4,15 +4,21 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+def is_sorted(arr):
+  for i in range(1, len(arr)):
+    if arr[i] <= arr[i - 1]:
+      return False
+  return True
+
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-      def check(node, lower, upper):
-        if not node:
-          return True
-        
-        if node.val >= upper or node.val <= lower:
-          return False
-        
-        return check(node.left, lower, node.val) and check(node.right, node.val, upper)
+  def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    ino = []
+    def inorder(node):
+      if not node:
+        return
+      inorder(node.left)
+      ino.append(node.val)
+      inorder(node.right)
       
-      return check(root, -math.inf, math.inf)
+    inorder(root)
+    return is_sorted(ino)
