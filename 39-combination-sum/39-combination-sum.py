@@ -1,37 +1,22 @@
 class Solution:
-  def combinationSum(self, nums: List[int], target: int):
+  def combinationSum(self, arr: List[int], k: int):
     ans = []
-      
-#       def bt(nums, t, cur, ind):
-#         if t == 0:
-#           ans.append(cur)
-#           return
-#         if t < 0:
-#           return
-        
-#         for i in range(ind, len(nums)):
-#           bt(nums, t - nums[i], cur + [nums[i]], i)
-      
-#       bt(nums, target, [], 0)
-#       return ans
-
+    n = len(arr)
     def recur(i, cursum, path):
-      if cursum == target:
-        return ans.append(path)
-      if i < 0:
-        return
-      
-      # not_pick
-      recur(i - 1, cursum, path)
-      
-      # pick
-      sm = cursum + nums[i]
-      if sm <= target:
-        recur(i, sm, path + [nums[i]])
-    
-    recur(len(nums) - 1, 0, [])
-    return ans     
-      
-      
+        if cursum == k:
+            ans.append(path)
+            return
+        
+        if cursum > k:
+            return
+        
+        for ind in range(i, n):
+            if ind > i and arr[ind] == arr[ind - 1]:
+                continue
+            recur(ind, cursum + arr[ind], path + [arr[ind]])
+        
+    recur(0, 0, [])
+    print(ans)
+    return ans
       
       
