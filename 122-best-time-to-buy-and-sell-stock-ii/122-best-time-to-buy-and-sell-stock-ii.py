@@ -1,20 +1,23 @@
 class Solution:
-  def maxProfit(self, prices: List[int]) -> int:
+  def maxProfit(self, values: List[int]) -> int:
+    n = len(values)
     memo = {}
-    n = len(prices)
-    
     def recur(i, can_buy):
-      if i >= n:
+      if i == n:
         return 0
-      memo_str = f"{i},{can_buy}"
+      memo_str = "{},{}".format(i, can_buy)
       if memo_str in memo:
         return memo[memo_str]
-        
+
       if can_buy:
-        memo[memo_str] = max(recur(i + 1, True), recur(i + 1, False) - prices[i])
+        buy = recur(i + 1, False) - values[i]
+        dont_buy = recur(i + 1, True)
+        memo[memo_str] = max(buy, dont_buy)
       else:
-        memo[memo_str] = max(recur(i + 1, False), recur(i + 1, True) + prices[i])
-        
+        sell = recur(i + 1, True) + values[i]
+        dont_sell = recur(i + 1, False)
+        memo[memo_str] = max(sell, dont_sell)
+
       return memo[memo_str]
     
     return recur(0, True)
