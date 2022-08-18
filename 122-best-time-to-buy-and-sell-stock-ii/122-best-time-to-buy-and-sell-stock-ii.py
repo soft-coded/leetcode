@@ -22,20 +22,23 @@ class Solution:
     
 #     return recur(0, True)
 
-    dp = [[0] * 2 for _ in range(n + 1)]
+    # dp = [[0] * 2 for _ in range(n + 1)]
+    prev, cur = [0, 0], [0, 0]
     
     for i in range(n - 1, -1, -1):
       for can_buy in range(2):
         if can_buy:
-          buy = dp[i + 1][0] - values[i]
-          dont_buy = dp[i + 1][1]
-          dp[i][can_buy] = max(buy, dont_buy)
+          buy = prev[0] - values[i]
+          dont_buy = prev[1]
+          cur[can_buy] = max(buy, dont_buy)
         else:
-          sell = dp[i + 1][1] + values[i]
-          dont_sell = dp[i + 1][0]
-          dp[i][can_buy] = max(sell, dont_sell)    
+          sell = prev[1] + values[i]
+          dont_sell = prev[0]
+          cur[can_buy] = max(sell, dont_sell)
+      
+      prev = cur
     
-    return dp[0][1]
+    return cur[1]
     
     
     
