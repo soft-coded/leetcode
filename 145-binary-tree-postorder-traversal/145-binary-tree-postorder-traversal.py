@@ -12,10 +12,8 @@ class Solution:
         node = st.pop()
         if node:
           ans.append(node.val)
-          if node.left:
-            st.append(node.left)
-          if node.right:
-            st.append(node.right)
+          st.append(node.left)
+          st.append(node.right)
       
       ans.reverse()
       return ans
