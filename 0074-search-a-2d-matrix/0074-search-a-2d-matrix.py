@@ -1,4 +1,4 @@
-def index(m, n, i):
+def index(n, i):
   return (i // n, i % n)
 
 class Solution:
@@ -10,7 +10,7 @@ class Solution:
     
     while lo <= hi:
       mid = (lo + hi) // 2
-      mat_ind = index(m, n, mid)
+      mat_ind = index(n, mid)
       cur = mat[mat_ind[0]][mat_ind[1]]
       
       if cur == target:
